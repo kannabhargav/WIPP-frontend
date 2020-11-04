@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wipp-frontend
+spec:
+  selector:
+    matchLabels:
+      app: wipp-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wipp-frontend
+    spec:
+      containers:
+      - image: labshare/wipp-frontend:FRONTEND_VERSION_VALUE
+        name: wipp-frontend
+        imagePullPolicy: Always
+        args: ["wipp-backend", "8080"]
+        env:
+        - name: ARGOUIBASE_URL
+          value: ARGO_URL_VALUE
+        - name: JUPYTERHUB_URL
+          value: JUPYTERHUB_URL_VALUE
+        - name: VISIONUI_URL
+          value: VISION_URL_VALUE
+        - name: CATALOGUI_URL
+          value: CATALOG_URL_VALUE
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: labshare-docker
+
