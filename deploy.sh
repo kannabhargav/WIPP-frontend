@@ -17,6 +17,6 @@ sed -i.bak \
     deploy/kubernetes/ingress.yaml
 rm deploy/kubernetes/ingress.yaml.bak
 
+kubectl apply --kubeconfig=${KUBECONFIG} -f deploy/kubernetes/frontend-deployment.yaml
 kubectl apply --kubeconfig=${KUBECONFIG} -f deploy/kubernetes/services.yaml
 kubectl apply --kubeconfig=${KUBECONFIG} -f deploy/kubernetes/ingress.yaml
-kubectl apply --kubeconfig=${KUBECONFIG} -f deploy/kubernetes/frontend-deployment.yaml
